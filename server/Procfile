@@ -1,0 +1,1 @@
+web: DEBUG=${DEBUG:='*mediasoup* *INFO* *WARN* *ERROR*'} node server.js

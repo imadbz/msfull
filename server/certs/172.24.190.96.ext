@@ -1,0 +1,7 @@
+authorityKeyIdentifier=keyid,issuer
+basicConstraints=CA:FALSE
+keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+subjectAltName = @alt_names
+[alt_names]
+DNS.1 = 172.24.190.96 # Be sure to include the domain name here because Common Name is not so commonly honoured by itself
+IP.1 = 192.168.0.13 # Optionally, add an IP address (if the connection which you have planned requires it)
