@@ -4,8 +4,9 @@ if (window.location.hostname === 'test.mediasoup.org')
 	protooPort = 4444;
 
 export function getProtooUrl({ roomId, peerId }) {
-	// const hostname = window.location.hostname;
-	const hostname = 'serene-badlands-64877.herokuapp.com';
+	const hostname = window.location.hostname;
+	// const hostname = 'serene-badlands-64877.herokuapp.com';
 
-	return `wss://${hostname}/?roomId=${roomId}&peerId=${peerId}`;
+	return `wss://${hostname}:${protooPort}/?roomId=${roomId}&peerId=${peerId}`;
 }
+

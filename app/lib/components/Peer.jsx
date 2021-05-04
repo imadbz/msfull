@@ -15,7 +15,12 @@ const Peer = (props) => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   useHotkeys("c", () => {
-    setActiveVideoSource((c) => c + 1)
+  	setSidebarOpen(false);
+	  setActiveVideoSource((c) => c + 1)
+  })
+
+ useHotkeys("shift+f", () => {
+    setSidebarOpen((c) => !c)
   })
 
   console.log("videoConsumers", videoConsumers, activeVideoSource)
@@ -49,7 +54,11 @@ const Peer = (props) => {
 
       <div className={"peer-content"}>
         <div className={"peers-sidebar" + (sidebarOpen ? " fullWidth" : " sided")}>
-          {!sidebarOpen && (
+
+	  <div class="helpers">
+	  <p className="tooltip">use shortcut <code>c</code> to switch between active cameras</p>
+          <p className="tooltip">use shortcut <code>shift+f</code> to switch between fullscreen and one camera focus mode</p>
+	  {!sidebarOpen && (
             <button
               onClick={() => {
                 setSidebarOpen(!sidebarOpen)
@@ -58,6 +67,7 @@ const Peer = (props) => {
               FullScreen
             </button>
           )}
+	  </div>
           {videoConsumers.map((videoConsumer, index) => {
             const videoEnabled = Boolean(videoConsumer) && !videoConsumer.remotelyPaused
 
@@ -67,7 +77,7 @@ const Peer = (props) => {
               videoEnabled && (
                 <div
                   key={videoConsumer.id}
-                  style={{ position: "relative" }}
+                  style={{ position: "relative", border: !sidebarOpen && activeVideoSource == index ? "3px solid yellow" : "none" }}
                   onClick={() => {
                     setActiveVideoSource(index)
                     setSidebarOpen(false)

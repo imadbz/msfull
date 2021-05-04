@@ -11,7 +11,7 @@ console.log('config.js:\n%s', JSON.stringify(config, null, '  '));
 /* eslint-enable no-console */
 
 const fs = require('fs');
-// const https = require('https');
+const https = require('https');
 const http = require('http');
 
 const url = require('url');
@@ -399,13 +399,14 @@ async function runHttpsServer() {
 	logger.info('running an HTTPS server...');
 
 	// HTTPS server for the protoo WebSocket server.
-	// const tls =
-	// {
-	// 	cert: fs.readFileSync(config.https.tls.cert),
-	// 	key: fs.readFileSync(config.https.tls.key)
-	// };
+	const tls =
+	{
+		cert: fs.readFileSync(config.https.tls.cert),
+		key: fs.readFileSync(config.https.tls.key)
+	};
 
-	httpsServer = http.createServer(expressApp);
+
+	httpsServer = https.createServer(tls, expressApp);
 
 	await new Promise((resolve) => {
 		httpsServer.listen(
